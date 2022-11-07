@@ -60,7 +60,7 @@ public class BoschIoReposClientService {
         List<BoschIoGithubRepo> repos = new ArrayList<>();
         try{
             String reposAsJson = Files.readString(path);
-            repos = new Gson().fromJson(reposAsJson, new TypeToken<BoschIoGithubRepo>(){}.getType());
+            repos = new Gson().fromJson(reposAsJson, new TypeToken<List<BoschIoGithubRepo>>(){}.getType());
 
         }catch(IOException ex){
             ex.getCause();
@@ -69,21 +69,30 @@ public class BoschIoReposClientService {
         return repos;
     }
 
+    public List<BoschIoGithubRepo> getAllBoschIoReposFromFile(){
+        return readJsonDataFromFile(Path.of("bosch-io-repos.json"));
+    }
+
     public BoschIoGithubRepo filterBoschIoReposByFullName(String fullName){
         List<BoschIoGithubRepo> repos = readJsonDataFromFile(Path.of("bosch-io-repos.json"));
         return repos.stream()
-                    .filter(repo -> repo.getFull_name().equals(fullName)).findAny().orElse(null);
+                    .filter(repo -> repo.getFull_name().equals(fullName))
+                    .findAny()
+                    .orElse(null);
     }
 
     public BoschIoGithubRepo filterBoschIoReposByDescription(String description){
         List<BoschIoGithubRepo> repos = readJsonDataFromFile(Path.of("bosch-io-repos.json"));
         return repos.stream()
-                    .filter(repo -> repo.getDescription().equals(description)).findAny().orElse(null);
+                    .filter(repo -> (repo.getDescription() != null && repo.getDescription().equals(description)))
+                    .findAny()
+                    .orElse(null);
     }
 
     public List<BoschIoGithubRepo> filterBoschIoReposByLanguage(String language){
         List<BoschIoGithubRepo> repos = readJsonDataFromFile(Path.of("bosch-io-repos.json"));
         return repos.stream()
-                    .filter(repo -> repo.getLanguage().equals(language)).collect(Collectors.toUnmodifiableList());
+                .filter(repo -> (repo.getLanguage() != null && repo.getLanguage().equals(language)))
+                .collect(Collectors.toUnmodifiableList());
     }
 }
