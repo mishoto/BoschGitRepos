@@ -20,7 +20,7 @@ target/
 *.ipr
 
 # Maven artifacts
-pom.xml
+#pom.xml
 
 ### NetBeans ###
 /nbproject/private/
