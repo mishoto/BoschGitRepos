@@ -1,0 +1,10 @@
+###
+GET http://localhost:8090/bosch-io-repos/filter-by-language?language=X
+###
+GET http://localhost:8090/bosch-io-repos/filter-by-description?description=X
+###
+GET http://localhost:8090/bosch-io-repos/filter-by-name?fullName=X
+###
+GET http://localhost:8090/bosch-io-repos/all-from-json-file
+###
+GET http://localhost:8090/bosch-io-repos/all-from-github-api
