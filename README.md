@@ -23,11 +23,11 @@ On windows you have to install Docker desktop if you want to start application a
 
 ### Installing
 
-Download project from repo.
+Download and build the project.
 
 - [BoschGitRepos](https://github.com/mishoto/BoschGitRepos)
 
-In the project's folder build docker image:
+In the project's folder build docker image, but before that you have to start docker daemon via docker desktop:
 
 ```
 docker build -t <your image name> .
@@ -42,10 +42,10 @@ docker images
 Run the app container from this image
 
 ```
-docker run -d -p 8090:8095 --name <your container name> 
+docker run -p 8095:8090 <your image name> 
 ```
 
-Tomcat is running on port 8090 and the container port is upon your preference if is not conflicting OS running ports
+Tomcat is running on port 8090 and the container port is 8095
 
 
 
